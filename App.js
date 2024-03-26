@@ -8,6 +8,7 @@ export default function App() {
   return (
     <View style={[styles.container]}>
       <SafeAreaView style={[styles.screenwide, styles.main]}>
+        
         <Text>Main screen</Text>
       </SafeAreaView>
       <Navbar />
