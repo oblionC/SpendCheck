@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TouchableHighlight, TouchableOpacity, Pressable } from 'react-native';
 import { COLORS } from '../constants/colors';
 import { useState } from 'react';
 
@@ -6,16 +6,16 @@ export default function Navbar(props) {
     
     return (
         <SafeAreaView style={[ styles.navbar]}>
-            <TouchableOpacity style={[styles.tab]} onPress={props.onPress}>
+            <Pressable style={[styles.tab]} onPress={() => props.onPress(0)}>
                 <View style={[styles.tab]}>
                     <Text>Home</Text>
                 </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.tab]} onPress={props.onPress}>
+            </Pressable>
+            <Pressable style={[styles.tab]} onPress={() => props.onPress(1)}>
                 <View >
                     <Text>New</Text>
                 </View>
-            </TouchableOpacity>
+            </Pressable>
         </SafeAreaView>
     )
 }

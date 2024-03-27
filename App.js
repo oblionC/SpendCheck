@@ -1,25 +1,32 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
 import Navbar from './src/Navbar';
 import { COLORS } from './src/constants/colors';
 import { useState } from 'react';
 import HomeScreen from './src/HomeScreen';
+import NewScreen from './src/NewScreen';
 
 
 export default function App() {
   const [count, setCount] = useState(0);
-  const onPress = () => {
-    setCount(count + 1);
+  const [screen, setScreen] = useState(0);
+  const onPress = (screen) => {
+    setScreen(screen);
   }
 
   return (
     <View style={[ styles.container ]}>
+
       <SafeAreaView style={styles.head}>
         <Text style={{fontSize: 32, margin: 15}}>BalanceCheck</Text>
       </SafeAreaView>
+
       <SafeAreaView style={[ styles.main ]}>
-        <HomeScreen count={count} />
+        {screen === 0 && <HomeScreen count={count} />}
+        {screen === 1 && <NewScreen count={count} />}
       </SafeAreaView>
+
       <Navbar onPress={onPress} />
+
     </View>
   );
 }
@@ -39,20 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: "50",
     overflow: "hidden",
   },
-  userPfp: {
-    width: 300,
-    height: 300,
-    borderRadius: 300 / 2,
-    overflow: "hidden",
-    borderWidth: 3,
-    borderColor: COLORS.secondary,
-    margin: 30
-  },
-  userPfpImg: {
-    width: "100%",
-    height: "100%",
-    objectFit: "contain",
-  },
+  
   head: {
     justifyContent: "center",
     alignItems: "center",
