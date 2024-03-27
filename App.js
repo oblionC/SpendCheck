@@ -2,8 +2,8 @@ import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from 'react-n
 import Navbar from './src/Navbar';
 import { COLORS } from './src/constants/colors';
 import { useState } from 'react';
+import HomeScreen from './src/HomeScreen';
 
-let userPfp = require('./public/img/carb_2.png');
 
 export default function App() {
   const [count, setCount] = useState(0);
@@ -17,13 +17,7 @@ export default function App() {
         <Text style={{fontSize: 32, margin: 15}}>BalanceCheck</Text>
       </SafeAreaView>
       <SafeAreaView style={[ styles.main ]}>
-        <ScrollView contentContainerStyle={styles.container}>
-          <View style={[ styles.userPfp ]}>
-            <Image source={userPfp} style={[ styles.userPfpImg ]} />
-          </View>
-          <Text style={{fontSize: 16, textAlign: "center"}}> Your Spendings </Text>
-          <Text style={{fontSize: 42, textAlign: "center", margin: 40}}> Rs. {count} </Text>
-        </ScrollView>
+        <HomeScreen count={count} />
       </SafeAreaView>
       <Navbar onPress={onPress} />
     </View>
