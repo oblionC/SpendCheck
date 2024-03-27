@@ -1,18 +1,19 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from 'react-native';
 import Navbar from './src/Navbar';
 import { COLORS } from './src/constants/colors';
+import { useState } from 'react';
 
 let userPfp = require('./public/img/carb_2.png');
 
 export default function App() {
+  const [count, setCount] = useState(0);
+  const onPress = () => {
+    setCount(count + 1);
+  }
+
   return (
     <View style={[ styles.container ]}>
-      <SafeAreaView style={{
-        justifyContent: "center",
-        alignItems: "center",
-        borderBottomWidth: 3,
-        borderBottomColor: COLORS.secondary
-      }}>
+      <SafeAreaView style={styles.head}>
         <Text style={{fontSize: 32, margin: 15}}>BalanceCheck</Text>
       </SafeAreaView>
       <SafeAreaView style={[ styles.main ]}>
@@ -21,10 +22,10 @@ export default function App() {
             <Image source={userPfp} style={[ styles.userPfpImg ]} />
           </View>
           <Text style={{fontSize: 16, textAlign: "center"}}> Your Spendings </Text>
-          <Text style={{fontSize: 42, textAlign: "center", margin: 40}}> Rs. 400000 </Text>
+          <Text style={{fontSize: 42, textAlign: "center", margin: 40}}> Rs. {count} </Text>
         </ScrollView>
       </SafeAreaView>
-      <Navbar />
+      <Navbar onPress={onPress} />
     </View>
   );
 }
@@ -57,5 +58,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     objectFit: "contain",
+  },
+  head: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomWidth: 3,
+    borderBottomColor: COLORS.secondary
   }
 });
