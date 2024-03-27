@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { COLORS } from '../constants/colors';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function Navbar() {
     return (
-        <SafeAreaView style={[styles.screenwide, styles.navbar]}>
+        <SafeAreaView style={[ styles.navbar]}>
             <View style={[styles.tab]}>
                 <Text>Tab1</Text>
             </View>
@@ -21,11 +20,13 @@ export default function Navbar() {
 const styles = StyleSheet.create({
     navbar: {
         flexDirection: "row",
-        backgroundColor: COLORS.secondary,
-        flex: 0.11
+        backgroundColor: COLORS.primary,
+        flex: 0.08,
+        borderTopWidth: 3,
+        borderTopColor: COLORS.secondary,
     },
     tab: {
-        backgroundColor: COLORS.secondary,
+        backgroundColor: COLORS.primary,
         height: "100%",
         flex: 1,
         justifyContent: "center",
