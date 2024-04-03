@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 let userPfp = require('../../public/img/carb_2.png');
 
+const USERPFP_SIZE = 300;
 
 export default function HomeScreen(props) {
     
@@ -20,9 +21,9 @@ export default function HomeScreen(props) {
 
 const styles = StyleSheet.create({
     userPfp: {
-        width: 300,
-        height: 300,
-        borderRadius: 300 / 2,
+        width: USERPFP_SIZE,
+        height: USERPFP_SIZE,
+        borderRadius: USERPFP_SIZE / 2,
         overflow: "hidden",
         borderWidth: 3,
         borderColor: COLORS.secondary,

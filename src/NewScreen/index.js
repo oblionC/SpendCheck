@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native';
 import { COLORS } from '../constants/colors';
 import { useState } from 'react';
 
@@ -8,25 +8,35 @@ export default function NewScreen(props) {
     
     return (
         <ScrollView contentContainerStyle={styles.container}>
-          <Text style={{fontSize: 16, textAlign: "center"}}> Your Spendings </Text>
-          <Text style={{fontSize: 42, textAlign: "center", margin: 40}}> Rs. {props.count} </Text>
+          <View style={{justifyContent: "center", alignItems: "center", height: "100%"}}>
+            <View>
+              <Text>New spend:</Text>
+            </View>
+            <View style = {styles.textbox}>
+              <TextInput style = {styles.inputBox} />
+            </View>
+          </View>
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    userPfp: {
-        width: 300,
-        height: 300,
-        borderRadius: 300 / 2,
-        overflow: "hidden",
-        borderWidth: 3,
-        borderColor: COLORS.secondary,
-        margin: 30
-      },
-      userPfpImg: {
-        width: "100%",
-        height: "100%",
-        objectFit: "contain",
-      },
+  container: {
+    backgroundColor: COLORS.primary,
+    height: "100%",
+    width: "100%",
+    flexDirection: "column",
+  },
+  inputBox: {
+    borderWidth: 3,
+    borderColor: COLORS.secondary,
+    width: "100%",
+    height: "100%",
+  },
+  textbox: {
+    width: 300,
+    height: 70,
+    borderWidth: 5,
+    borderColor: "black",
+  }
 })
