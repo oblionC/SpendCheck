@@ -13,8 +13,8 @@ export default function HomeScreen(props) {
           <View style={[ styles.userPfp ]}>
             <Image source={userPfp} style={[ styles.userPfpImg ]} />
           </View>
-          <Text style={{fontSize: 16, textAlign: "center"}}> Your Spendings </Text>
-          <Text style={{fontSize: 42, textAlign: "center", margin: 40}}> Rs. {props.count} </Text>
+          <Text style={{fontSize: 16, textAlign: "center", color: COLORS.tertiary}}> Your Spendings </Text>
+          <Text style={{fontSize: 42, textAlign: "center", margin: 40, color: COLORS.text}}> Rs. {props.count} </Text>
         </ScrollView>
     )
 }

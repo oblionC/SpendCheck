@@ -6,12 +6,12 @@ export default function Navbar(props) {
     
     return (
         <SafeAreaView style={[ styles.navbar]}>
-            <Pressable style={[styles.tab]} onPress={() => props.onPress(0)}>
+            <Pressable style={[styles.tab]} onPress={() => props.changeTab(0)}>
                 <View style={[styles.tab]}>
                     <Text>Home</Text>
                 </View>
             </Pressable>
-            <Pressable style={[styles.tab]} onPress={() => props.onPress(1)}>
+            <Pressable style={[styles.tab]} onPress={() => props.changeTab(1)}>
                 <View >
                     <Text>New</Text>
                 </View>
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         height: "100%",
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        color: COLORS.text
     }
 })

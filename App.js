@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import Navbar from './src/Navbar';
 import { COLORS } from './src/constants/colors';
 import { useState } from 'react';
@@ -7,25 +7,28 @@ import NewScreen from './src/NewScreen';
 
 
 export default function App() {
-  const [count, setCount] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [screen, setScreen] = useState(0);
-  const onPress = (screen) => {
+  const changeTab = (screen) => {
     setScreen(screen);
+  }
+  const changeAmount = (value) => {
+    setAmount(value);
   }
 
   return (
     <View style={[ styles.container ]}>
 
       <SafeAreaView style={styles.head}>
-        <Text style={{fontSize: 32, margin: 15}}>BalanceCheck</Text>
+        <Text style={{fontSize: 32, margin: 15, color: COLORS.text}}>BalanceCheck</Text>
       </SafeAreaView>
 
       <SafeAreaView style={[ styles.main ]}>
-        {screen === 0 && <HomeScreen count={count} />}
-        {screen === 1 && <NewScreen count={count} />}
+        {screen === 0 && <HomeScreen count={amount} />}
+        {screen === 1 && <NewScreen amount={amount} changeAmount={changeAmount} changeTab={changeTab} />}
       </SafeAreaView>
 
-      <Navbar onPress={onPress} />
+      <Navbar changeTab={changeTab} />
 
     </View>
   );
@@ -51,6 +54,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderBottomWidth: 3,
-    borderBottomColor: COLORS.secondary
+    borderBottomColor: COLORS.secondary,
   }
 });
