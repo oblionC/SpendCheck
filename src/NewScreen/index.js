@@ -2,10 +2,11 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-
 import { COLORS } from '../constants/colors';
 import { useState } from 'react';
 import isNumber from '../utils/isNumber';
+import { mainContainerStyle } from '../styles/mainContainerStyle';
 
 let userPfp = require('../../public/img/carb_2.png');
 
-export default function NewScreen(props) {
+export default function NewScreen({navigation, amount, changeAmount}) {
   const [error, setError] = useState(false);
   const [inp, setInp] = useState("");
 
@@ -18,12 +19,12 @@ export default function NewScreen(props) {
       console.log("caught")
       setError(true)
     }
-    props.changeAmount(props.amount + inputValue)
-    props.changeTab(0)
+    changeAmount(amount + inputValue)
+    navigation.navigate("Home")
   }
     
   return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={mainContainerStyle.mainContainer}>
 
         {/* Error lable in case user does not input number. Only appears when error triggered */}
         {error && <View style={styles.errorLabel}>
@@ -50,12 +51,6 @@ export default function NewScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.primary,
-    height: "100%",
-    width: "100%",
-    flexDirection: "column",
-  },
   inputBox: {
     borderWidth: 3,
     borderColor: COLORS.secondary,

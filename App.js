@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import Navbar from './src/Navbar';
-import { COLORS } from './src/constants/colors';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import HomeScreen from './src/HomeScreen';
 import NewScreen from './src/NewScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import 'react-native-reanimated'
+import { COLORS } from './src/constants/colors';
 
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   const [amount, setAmount] = useState(0);
-  const [screen, setScreen] = useState(0);
   const changeTab = (screen) => {
     setScreen(screen);
   }
@@ -17,7 +19,16 @@ export default function App() {
   }
 
   return (
-    <View style={[ styles.container ]}>
+    <NavigationContainer>
+      <Stack.Navigator >
+        <Stack.Screen name="Home">
+          { (props) => <HomeScreen {...props} count={amount} /> }
+        </Stack.Screen>
+        <Stack.Screen name="New">
+          { (props) => <NewScreen {...props} amount={amount} changeAmount={changeAmount} /> }
+        </Stack.Screen>
+      </Stack.Navigator>
+      {/* <View style={[ styles.container ]}>
 
       <SafeAreaView style={styles.head}>
         <Text style={{fontSize: 32, margin: 15, color: COLORS.text}}>BalanceCheck</Text>
@@ -30,18 +41,14 @@ export default function App() {
 
       <Navbar changeTab={changeTab} />
 
-    </View>
+      </View> */}
+    </NavigationContainer>
+   
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.primary,
-    height: "100%",
-    width: "100%",
-    flexDirection: "column",
 
-  },
   main: {
     flexGrow: 1,
     flex: 1,
@@ -54,6 +61,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderBottomWidth: 3,
-    borderBottomColor: COLORS.secondary,
+    // borderBottomColor: COLORS.secondary,
   }
 });
