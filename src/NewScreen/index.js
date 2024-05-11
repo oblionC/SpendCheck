@@ -12,30 +12,28 @@ export default function NewScreen({navigation, amount, changeAmount}) {
 
   const checkInput = () => {
     let inputValue;
-    try{
-      inputValue = parseInt(inp);
-    }
-    catch {
-      console.log("caught")
-      setError(true)
+    inputValue = parseInt(inp);
+    console.log(inputValue)
+    if(isNaN(inputValue)) {
+      setError(true);
+      inputValue = 0;
     }
     changeAmount(amount + inputValue)
-    navigation.navigate("Home")
+    // navigation.navigate("Home")
   }
     
   return (
       <ScrollView contentContainerStyle={mainContainerStyle.mainContainer}>
-
-        {/* Error lable in case user does not input number. Only appears when error triggered */}
-        {error && <View style={styles.errorLabel}>
-          <Text style={{color: "red"}}>Your input is not an integer</Text> 
-        </View>}
-
         <View style={{justifyContent: "center", alignItems: "center", height: "100%"}}>
           <View>
             <Text style={{color: COLORS.tertiary}}>New spend:</Text>
           </View>
+          
           <View style = {styles.textbox}>
+            {/* Error lable in case user does not input number. Only appears when error triggered */}
+            {error && <View style={styles.errorLabel}>
+              <Text style={{color: "red"}}>Enter a value</Text> 
+            </View>}
             <TextInput style = {styles.inputBox} keyboardType="numeric" value={inp} onChangeText={(text) => {
                 if(isNumber(text)) {
                   setInp(text);
