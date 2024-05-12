@@ -62,12 +62,14 @@ const styles = StyleSheet.create({
     padding: 10
   },
   textbox: {
-    width: 300,
+    width: '100%',
     height: 70,
+
   },
   textboxContainer: {
     width: 300,
-
+    marginTop: 20,
+    marginBottom: 20
   },
   addButton: {
     backgroundColor: COLORS.tertiary,

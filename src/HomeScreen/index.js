@@ -15,7 +15,7 @@ export default function HomeScreen({ count, navigation }) {
         </View>
         <Text style={{fontSize: 16, textAlign: "center", color: COLORS.tertiary}}> Your Spendings </Text>
         <Text style={{fontSize: 42, textAlign: "center", margin: 40, color: COLORS.text}}> Rs. {count} </Text>
-        <Button title="Ye" onPress={() => navigation.navigate("New")} />
+        <Button title="New spend" onPress={() => navigation.navigate("New")} />
       </ScrollView>
   )
 }
