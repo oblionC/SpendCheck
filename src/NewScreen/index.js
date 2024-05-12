@@ -13,13 +13,12 @@ export default function NewScreen({navigation, amount, changeAmount}) {
   const checkInput = () => {
     let inputValue;
     inputValue = parseInt(inp);
-    console.log(inputValue)
     if(isNaN(inputValue)) {
       setError(true);
-      inputValue = 0;
+      return;
     }
-    changeAmount(amount + inputValue)
-    // navigation.navigate("Home")
+    changeAmount(amount + inputValue);
+    navigation.navigate("Home");
   }
     
   return (
@@ -28,17 +27,22 @@ export default function NewScreen({navigation, amount, changeAmount}) {
           <View>
             <Text style={{color: COLORS.tertiary}}>New spend:</Text>
           </View>
-          
-          <View style = {styles.textbox}>
+          <View style={styles.textboxContainer}>
             {/* Error lable in case user does not input number. Only appears when error triggered */}
-            {error && <View style={styles.errorLabel}>
-              <Text style={{color: "red"}}>Enter a value</Text> 
-            </View>}
-            <TextInput style = {styles.inputBox} keyboardType="numeric" value={inp} onChangeText={(text) => {
-                if(isNumber(text)) {
-                  setInp(text);
-                }
-              }} />
+
+            <View style={styles.errorLabel}>
+              <Text style={{color: "red"}}>
+                { error ? "Amount cannot be empty" : "" }
+              </Text> 
+            </View>
+
+            <View style = {styles.textbox}>
+              <TextInput style = {styles.inputBox} keyboardType="numeric" value={inp} onChangeText={(text) => {
+                  if(isNumber(text) || text === "") {
+                    setInp(text);
+                  }
+                }} />
+            </View>
           </View>
           <Pressable style={ styles.addButton } onPress={() => {checkInput()}}>
             <Text>Add</Text>
@@ -60,7 +64,10 @@ const styles = StyleSheet.create({
   textbox: {
     width: 300,
     height: 70,
-    marginVertical: 20
+  },
+  textboxContainer: {
+    width: 300,
+
   },
   addButton: {
     backgroundColor: COLORS.tertiary,
@@ -70,5 +77,5 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center"
-  }
+  },
 })
