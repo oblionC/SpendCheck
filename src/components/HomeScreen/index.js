@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, ScrollView, Image, Pressable, Button } from 'react-native';
 import { useContext, useState } from 'react';
-import { mainContainerStyle } from '../styles/mainContainerStyle';
-import { COLORS } from '../constants/colors';
+import { mainContainerStyle } from '../../styles/mainContainerStyle';
+import { COLORS } from '../../constants/colors';
+import LabelText from '../../TextComponents/LabelText';
 
-let userPfp = require('../../public/img/carb_2.png');
+let userPfp = require('../../../public/img/carb_2.png');
 
 const USERPFP_SIZE = 300;
 
@@ -13,7 +14,7 @@ export default function HomeScreen({ count, navigation }) {
         <View style={[ styles.userPfp ]}>
           <Image source={userPfp} style={[ styles.userPfpImg ]} />
         </View>
-        <Text style={{fontSize: 16, textAlign: "center", color: COLORS.tertiary}}> Your Spendings </Text>
+        <LabelText> Your Spendings </LabelText>
         <Text style={{fontSize: 42, textAlign: "center", margin: 40, color: COLORS.text}}> Rs. {count} </Text>
         <Button title="New spend" onPress={() => navigation.navigate("New")} />
       </ScrollView>

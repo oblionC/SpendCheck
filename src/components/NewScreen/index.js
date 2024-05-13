@@ -1,13 +1,17 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-native';
-import { COLORS } from '../constants/colors';
-import { useState } from 'react';
-import isNumber from '../utils/isNumber';
-import { mainContainerStyle } from '../styles/mainContainerStyle';
+import { COLORS } from '../../constants/colors';
+import { useState, createContext } from 'react';
+import { appBorderStyle } from '../../styles/appBorderStyle';
+import isNumber from '../../utils/isNumber';
+import { mainContainerStyle } from '../../styles/mainContainerStyle';
+import CategoryButton from '../CategoryButton';
+import CategorySelect from '../CategorySelect';
 
-let userPfp = require('../../public/img/carb_2.png');
+let userPfp = require('../../../public/img/carb_2.png');
 
 export default function NewScreen({navigation, amount, changeAmount}) {
   const [error, setError] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState("food");
   const [inp, setInp] = useState("");
 
   const checkInput = () => {
@@ -28,15 +32,14 @@ export default function NewScreen({navigation, amount, changeAmount}) {
             <Text style={{color: COLORS.tertiary}}>New spend:</Text>
           </View>
           <View style={styles.textboxContainer}>
-            {/* Error lable in case user does not input number. Only appears when error triggered */}
-
+            {/* Error label in case user does not input number. Only appears when error triggered */}
             <View style={styles.errorLabel}>
               <Text style={{color: "red"}}>
                 { error ? "Amount cannot be empty" : "" }
               </Text> 
             </View>
 
-            <View style = {styles.textbox}>
+            <View style = {[ appBorderStyle.borderStyle, styles.textbox ]}>
               <TextInput style = {styles.inputBox} keyboardType="numeric" value={inp} onChangeText={(text) => {
                   if(isNumber(text) || text === "") {
                     setInp(text);
@@ -44,7 +47,8 @@ export default function NewScreen({navigation, amount, changeAmount}) {
                 }} />
             </View>
           </View>
-          <Pressable style={ styles.addButton } onPress={() => {checkInput()}}>
+          <CategorySelect currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
+          <Pressable style={[ appBorderStyle.borderStyle, styles.addButton ]} onPress={() => {checkInput()}}>
             <Text>Add</Text>
           </Pressable>
         </View>
@@ -54,8 +58,6 @@ export default function NewScreen({navigation, amount, changeAmount}) {
 
 const styles = StyleSheet.create({
   inputBox: {
-    borderWidth: 3,
-    borderColor: COLORS.secondary,
     width: "100%",
     height: "100%",
     color: COLORS.text,
@@ -64,7 +66,6 @@ const styles = StyleSheet.create({
   textbox: {
     width: '100%',
     height: 70,
-
   },
   textboxContainer: {
     width: 300,
@@ -80,4 +81,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+
 })

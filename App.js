@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { COLORS } from './src/constants/colors';
 import { createContext, useState } from 'react';
-import HomeScreen from './src/HomeScreen';
-import NewScreen from './src/NewScreen';
+import HomeScreen from './src/components/HomeScreen';
+import NewScreen from './src/components/NewScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-reanimated'
@@ -29,7 +29,6 @@ export default function App() {
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
-   
   );
 }
 
