@@ -9,10 +9,10 @@ export default function CategorySelect({ currentCategory, setCurrentCategory }) 
     const categoryList = [];
     let key = 0;
     Object.entries(categories).forEach(category => {
-        categoryList.push(<CategoryButton key={key} category={category[0]}/>)
+        categoryList.push(<CategoryButton key={key} category={category[0]} currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
+    )
         key++;
     })
-    console.log(categoryList);
 
     return (
         <View style={[ styles.categories ]}>
