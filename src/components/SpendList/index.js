@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     spendList: {
         marginTop: 50,
         marginBottom: 50,
-        padding: 10, 
         width: 300,
         height: 50,
     }
