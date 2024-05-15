@@ -2,21 +2,24 @@ import { StyleSheet, Text, View, ScrollView, Image, Pressable, Button } from 're
 import { useContext, useState } from 'react';
 import { mainContainerStyle } from '../../styles/mainContainerStyle';
 import { COLORS } from '../../constants/colors';
-import LabelText from '../../TextComponents/LabelText';
-
+import { amountContext } from '../../utils/contexts';
+import LabelText from '../TextComponents/LabelText';
+import SpendList from '../SpendList';
 let userPfp = require('../../../public/img/carb_2.png');
 
 const USERPFP_SIZE = 300;
 
-export default function HomeScreen({ count, navigation }) {
+export default function HomeScreen({ navigation }) {
+  const amount = useContext(amountContext)
   return (
       <ScrollView contentContainerStyle={mainContainerStyle.mainContainer}>
         <View style={[ styles.userPfp ]}>
           <Image source={userPfp} style={[ styles.userPfpImg ]} />
         </View>
         <LabelText> Your Spendings </LabelText>
-        <Text style={{fontSize: 42, textAlign: "center", margin: 40, color: COLORS.text}}> Rs. {count} </Text>
+        <Text style={{fontSize: 42, textAlign: "center", margin: 40, color: COLORS.text}}>Rs. {amount}</Text>
         <Button title="New spend" onPress={() => navigation.navigate("New")} />
+        <SpendList />
       </ScrollView>
   )
 }

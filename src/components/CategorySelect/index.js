@@ -5,12 +5,12 @@ import { useEffect } from "react"
 
 
 
+
 export default function CategorySelect({ currentCategory, setCurrentCategory }) {
     const categoryList = [];
     let key = 0;
     Object.entries(categories).forEach(category => {
-        categoryList.push(<CategoryButton key={key} category={category[0]} currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
-    )
+        categoryList.push(<CategoryButton key={key} category={category[0]} currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />)
         key++;
     })
 

@@ -13,6 +13,7 @@ export default function CategoryButton({ category, setCurrentCategory, currentCa
     return (
         <Pressable style={buttonStyle} onPress={() => setCurrentCategory(category)}>
             <Text>{categories[category]}</Text>
+            <Text>{category}</Text>
         </Pressable>
     )
 }

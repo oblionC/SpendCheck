@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-native';
 import { COLORS } from '../../constants/colors';
-import { useState, createContext } from 'react';
+import { useState, createContext, useContext } from 'react';
 import { appBorderStyle } from '../../styles/appBorderStyle';
 import isNumber from '../../utils/isNumber';
+import { amountContext, spendListContext } from '../../utils/contexts';
 import { mainContainerStyle } from '../../styles/mainContainerStyle';
-import CategoryButton from '../CategoryButton';
 import CategorySelect from '../CategorySelect';
 
 let userPfp = require('../../../public/img/carb_2.png');
 
-export default function NewScreen({navigation, amount, changeAmount}) {
+export default function NewScreen({navigation, setAmount, setSpendList}) {
+  const amount = useContext(amountContext);
+  const spendList = useContext(spendListContext)
   const [error, setError] = useState(false);
   const [currentCategory, setCurrentCategory] = useState("food");
   const [inp, setInp] = useState("");
@@ -21,7 +23,11 @@ export default function NewScreen({navigation, amount, changeAmount}) {
       setError(true);
       return;
     }
-    changeAmount(amount + inputValue);
+    setAmount(amount + inputValue);
+    setSpendList(spendList.concat([{
+      amount: inputValue,
+      category: currentCategory,
+    }]))
     navigation.navigate("Home");
   }
     
