@@ -1,4 +1,6 @@
 export const categories = {
-    ["food"]: "🍔",
-    ["travel"]: "🚗",
+    "food": "🍔",
+    "travel": "🚗",
+    "bruh": "ye",
+    "true": "xd",
 }

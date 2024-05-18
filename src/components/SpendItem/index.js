@@ -1,13 +1,17 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, Pressable } from "react-native"
+import { useRef } from "react"
 import { appBorderStyle } from "../../styles/appBorderStyle"
 import { categories } from "../../constants/categories"
 import { COLORS } from "../../constants/colors"
 
-export default function SpendItem({ amount, category }) { 
+export default function SpendItem({ amount, category }) {
+    const spendItemStyle = useRef([styles.spendItem])
     return (
-        <View style={styles.spendItem}>
+        <Pressable style={spendItemStyle.current}
+            onPress={() => console.log("pressed")} 
+            onPressIn={() => {}}>
             <Text>Rs.{amount} {categories[category]}</Text>
-        </View>
+        </Pressable>
     )
 }
 
@@ -19,6 +23,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         borderColor: COLORS.secondary,
         display: "flex", 
-        alignItems: "center"
+        alignItems: "center",
+    },
+    pushedButton: {
+        backgroundColor: COLORS.tertiary
     }    
 })

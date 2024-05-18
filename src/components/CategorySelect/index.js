@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, Text, Pressable } from "react-native"
 import CategoryButton from "../CategoryButton"
 import { categories } from "../../constants/categories"
 import { useEffect } from "react"
@@ -15,19 +15,30 @@ export default function CategorySelect({ currentCategory, setCurrentCategory }) 
     })
 
     return (
-        <View style={[ styles.categories ]}>
-            {categoryList}
+        <View style={ styles.categorySection }>
+            <View style={ styles.categoryButtons }>
+                {categoryList}
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    categories: {
+    categorySection: {
+        display: "flex",
+        flexDirection: "column",
+        width: 300,
+        overflow: "auto",
+        marginBottom: 10,
+    },
+    categoryButtons: {
+        overflow: "auto",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-evenly",
-        height: 70,
-        width: 300,
-        marginBottom: 20,
-      }
+        flexWrap: "wrap",
+    },
+    categoryNew: {
+        justifyContent: "center",
+        alignItems: "center",
+    },
 })

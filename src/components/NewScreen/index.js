@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, PermissionsAndroid } from 'react-native';
 import { COLORS } from '../../constants/colors';
 import { useState, createContext, useContext } from 'react';
 import { appBorderStyle } from '../../styles/appBorderStyle';
@@ -23,6 +23,7 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
       setError(true);
       return;
     }
+    console.log('working')
     setAmount(amount + inputValue);
     setSpendList(spendList.concat([{
       amount: inputValue,

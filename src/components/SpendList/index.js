@@ -9,7 +9,7 @@ export default function SpendList() {
     const spendList = useContext(spendListContext);
     const index = useRef(0)
     return (
-        <ScrollView style={[appBorderStyle.borderStyle, styles.spendList]}>
+        <ScrollView showsVerticalScrollIndicator={false} style={[appBorderStyle.borderStyle, styles.spendList]}>
             {
                 spendList.map(spend => {
                     index.current += 1;
