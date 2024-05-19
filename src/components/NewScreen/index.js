@@ -23,7 +23,6 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
       setError(true);
       return;
     }
-    console.log('working')
     setAmount(amount + inputValue);
     setSpendList(spendList.concat([{
       amount: inputValue,
@@ -54,7 +53,7 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
                 }} />
             </View>
           </View>
-          <CategorySelect currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
+          <CategorySelect currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} navigation={navigation} />
           <Pressable style={[ appBorderStyle.borderStyle, styles.addButton ]} onPress={() => {checkInput()}}>
             <Text>Add</Text>
           </Pressable>
