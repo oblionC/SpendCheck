@@ -6,6 +6,7 @@ import isNumber from '../../utils/isNumber';
 import { amountContext, spendListContext } from '../../utils/contexts';
 import { mainContainerStyle } from '../../styles/mainContainerStyle';
 import CategorySelect from '../CategorySelect';
+import AddButton from '../AddButton';
 
 let userPfp = require('../../../public/img/carb_2.png');
 
@@ -54,9 +55,7 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
             </View>
           </View>
           <CategorySelect currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} navigation={navigation} />
-          <Pressable style={[ appBorderStyle.borderStyle, styles.addButton ]} onPress={() => {checkInput()}}>
-            <Text>Add</Text>
-          </Pressable>
+          <AddButton pressFunction={checkInput} />
         </View>
       </ScrollView>
   )
@@ -77,15 +76,5 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 20,
     marginBottom: 20
-  },
-  addButton: {
-    backgroundColor: COLORS.tertiary,
-    borderWidth: 3,
-    borderColor: COLORS.secondary, 
-    width: 100,
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-
+  }
 })

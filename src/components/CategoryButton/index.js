@@ -3,10 +3,15 @@ import { useState } from "react";
 import { appBorderStyle } from "../../styles/appBorderStyle";
 import { categories } from "../../constants/categories";
 import { COLORS } from "../../constants/colors";
+import NewCategoryScreen from "../NewCategoryScreen"
 
-const handlePress = (isNewButton, category, setCurrentCategory) => {
+const renderAddNewComponentPage = () => {
+    
+}
+
+const handlePress = (isNewButton, category, setCurrentCategory, navigation) => {
     if(isNewButton) {
-        console.log("new button");
+        navigation.navigate("NewCategory");
     }
     else {
         setCurrentCategory(category)
@@ -30,14 +35,14 @@ function CategoryNew() {
     )
 }
 
-export default function CategoryButton({ category, setCurrentCategory, currentCategory, isNewButton }) {
+export default function CategoryButton({ category, setCurrentCategory, currentCategory, isNewButton, navigation }) {
     const buttonStyle = [styles.categoryButton, appBorderStyle.borderStyle]
     if(category === currentCategory) {
         buttonStyle.push(styles.pushedButton)
     }
 
     return (
-        <Pressable style={buttonStyle} onPress={() => handlePress(isNewButton=isNewButton, category=category, setCurrentCategory=setCurrentCategory)}>
+        <Pressable style={buttonStyle} onPress={() => handlePress(isNewButton=isNewButton, category=category, setCurrentCategory=setCurrentCategory, navigation=navigation)}>
             {isNewButton ? <CategoryNew /> : <CategoryDetails category={category} setCurrentCategory={setCurrentCategory}/>}
         </Pressable>
     )

@@ -3,6 +3,7 @@ import { COLORS } from './src/constants/colors';
 import { useState } from 'react';
 import HomeScreen from './src/components/HomeScreen';
 import NewScreen from './src/components/NewScreen';
+import NewCategoryScreen from './src/components/NewCategoryScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { amountContext, spendListContext } from "./src/utils/contexts";
@@ -24,6 +25,9 @@ export default function App() {
           </Stack.Screen>
           <Stack.Screen name="New">
             { (props) => <NewScreen {...props} setAmount={setAmount} setSpendList={setSpendList} /> }
+          </Stack.Screen>
+          <Stack.Screen name="NewCategory">
+            { (props) => <NewCategoryScreen {...props} /> }
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
