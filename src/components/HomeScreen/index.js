@@ -12,7 +12,7 @@ const USERPFP_SIZE = 300;
 export default function HomeScreen({ navigation }) {
   const amount = useContext(amountContext)
   return (
-      <ScrollView contentContainerStyle={mainContainerStyle.mainContainer}>
+      <ScrollView contentContainerStyle={[mainContainerStyle.mainContainer, {height: "auto"}]}>
         <View style={[ styles.userPfp ]}>
           <Image source={userPfp} style={[ styles.userPfpImg ]} />
         </View>

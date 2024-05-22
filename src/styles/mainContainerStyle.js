@@ -4,10 +4,11 @@ import { COLORS } from "../constants/colors";
 export const mainContainerStyle = StyleSheet.create({
     mainContainer: {
         backgroundColor: COLORS.primary,
-        height: "100%",
         width: "100%",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: "center"
       }
 })

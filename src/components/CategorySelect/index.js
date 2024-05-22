@@ -18,7 +18,7 @@ export default function CategorySelect({ currentCategory, setCurrentCategory, na
         <View style={ styles.categorySection }>
             <View style={ styles.categoryButtons }>
                 {categoryList}
-                <CategoryButton isNewButton={true} navigation={navigation} />
+                <CategoryButton isNewButton={true} navigation={navigation} category="" />
             </View>
         </View>
     )

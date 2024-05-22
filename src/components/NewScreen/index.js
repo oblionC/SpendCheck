@@ -7,6 +7,8 @@ import { amountContext, spendListContext } from '../../utils/contexts';
 import { mainContainerStyle } from '../../styles/mainContainerStyle';
 import CategorySelect from '../CategorySelect';
 import AddButton from '../AddButton';
+import MainLabel from '../TextComponents/MainLabel';
+import TextInputBox from '../TextInputBox';
 
 let userPfp = require('../../../public/img/carb_2.png');
 
@@ -33,11 +35,9 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
   }
     
   return (
-      <ScrollView contentContainerStyle={mainContainerStyle.mainContainer}>
-        <View style={{justifyContent: "center", alignItems: "center", height: "100%"}}>
-          <View>
-            <Text style={{color: COLORS.tertiary}}>New spend:</Text>
-          </View>
+      <ScrollView contentContainerStyle={[mainContainerStyle.mainContainer]}>
+        <View style={{justifyContent: "center", alignItems: "center"}}>
+          <MainLabel>New spend:</MainLabel>
           <View style={styles.textboxContainer}>
             {/* Error label in case user does not input number. Only appears when error triggered */}
             <View style={styles.errorLabel}>
@@ -46,13 +46,14 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
               </Text> 
             </View>
 
-            <View style = {[ appBorderStyle.borderStyle, styles.textbox ]}>
-              <TextInput style = {styles.inputBox} keyboardType="numeric" value={inp} onChangeText={(text) => {
-                  if(isNumber(text) || text === "") {
-                    setInp(text);
-                  }
-                }} />
-            </View>
+            <TextInputBox value={inp} 
+            validateInput={(text) => {
+              if(isNumber(text) || text === "") {
+                setInp(text);
+              }
+            }}
+            keyboardType='numeric' 
+            />
           </View>
           <CategorySelect currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} navigation={navigation} />
           <AddButton pressFunction={checkInput} />
