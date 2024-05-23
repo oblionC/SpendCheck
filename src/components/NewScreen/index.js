@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, PermissionsAndroid } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, PermissionsAndroid, KeyboardAvoidingView, Platform} from 'react-native';
 import { COLORS } from '../../constants/colors';
 import { useState, createContext, useContext } from 'react';
 import { appBorderStyle } from '../../styles/appBorderStyle';
@@ -35,8 +35,9 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
   }
     
   return (
+    <KeyboardAvoidingView behavior="height">
       <ScrollView contentContainerStyle={[mainContainerStyle.mainContainer]}>
-        <View style={{justifyContent: "center", alignItems: "center"}}>
+        <View style={{justifyContent: "center", alignItems: "center", height: "100%"}}>
           <MainLabel>New spend:</MainLabel>
           <View style={styles.textboxContainer}>
             {/* Error label in case user does not input number. Only appears when error triggered */}
@@ -59,6 +60,8 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
           <AddButton pressFunction={checkInput} />
         </View>
       </ScrollView>
+    </KeyboardAvoidingView>
+
   )
 }
 
@@ -67,7 +70,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     color: COLORS.text,
-    padding: 10
   },
   textbox: {
     width: '100%',
@@ -75,7 +77,6 @@ const styles = StyleSheet.create({
   },
   textboxContainer: {
     width: 300,
-    marginTop: 20,
     marginBottom: 20
   }
 })

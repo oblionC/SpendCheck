@@ -5,7 +5,7 @@ import { textboxStyle } from "../../styles/textboxStyle"
 export default function TextInputBox({ value="", validateInput=()=>{return}, keyboardType="numeric" }) {
     return(
         <View style={{justifyContent: "center", alignItems: "center"}}>
-            <View style={[appBorderStyle.borderStyle, textboxStyle.textbox]}>
+            <View style={[appBorderStyle.borderStyle, textboxStyle.textboxWidth, textboxStyle.textboxHeight]}>
                 <TextInput style={textboxStyle.inputBox} keyboardType={keyboardType} value={value} onChangeText={(text) => {
                     validateInput(text)}
                  } />

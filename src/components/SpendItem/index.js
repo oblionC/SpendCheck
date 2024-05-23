@@ -9,7 +9,8 @@ export default function SpendItem({ amount, category }) {
     return (
         <Pressable style={spendItemStyle.current}
             onPress={() => console.log("pressed")} 
-            onPressIn={() => {}}>
+            onPressIn={() => {spendItemStyle
+            }}>
             <Text>Rs.{amount} {categories[category]}</Text>
         </Pressable>
     )

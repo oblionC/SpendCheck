@@ -3,7 +3,7 @@ import { COLORS } from "../constants/colors";
 
 export const mainContainerStyle = StyleSheet.create({
     mainContainer: {
-        backgroundColor: COLORS.primary,
+        backgroundColor: "pink",
         width: "100%",
         height: "100%",
         display: "flex",

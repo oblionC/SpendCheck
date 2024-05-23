@@ -7,9 +7,11 @@ export const textboxStyle = StyleSheet.create({
         height: "100%",
         color: COLORS.text,
         padding: 10
-      },
-      textbox: {
-        width: 300,
-        height: 70,
-      },
+    },
+    textboxHeight: {
+      height: 70,
+    },
+    textboxWidth: {
+      width: 300,
+    }
 })
