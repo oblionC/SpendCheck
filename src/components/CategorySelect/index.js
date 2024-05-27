@@ -29,13 +29,10 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         width: 300,
-        overflow: "auto",
         marginBottom: 10,
         userSelect: "none",
     },
     categoryButtons: {
-        overflow: "auto",
-        display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
     },

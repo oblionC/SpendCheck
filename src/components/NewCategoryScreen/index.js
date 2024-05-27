@@ -9,11 +9,12 @@ import EmojiPicker from "../EmojiPicker"
 import { useHeaderHeight } from "@react-navigation/elements"
 import AddButton from "../AddButton"
 import React from "react"
+import { textStyle } from "../../styles/textStyle"
 
 
 export default function NewCategoryScreen() {
     const [categoryName, setCategoryName] = useState("")
-    const [categoryEmoji, setCategoryEmoji] = useState("")
+    const [currentEmoji, setCurrentEmoji] = useState("")
     const [shiftY, setShiftY] = useState(new Animated.Value(0))
     const animatedValue2 = useMemo(() => {
         return new Animated.Value(2)
@@ -51,13 +52,13 @@ export default function NewCategoryScreen() {
                     <TouchableWithoutFeedback onPress={() => {
                         shiftUp()
                     }}>
-                        <View style={[appBorderStyle.borderStyle, textboxStyle.textboxHeight, {width: 100, height: 50}]}></View>
+                        <View style={[appBorderStyle.borderStyle, textboxStyle.textboxHeight, {width: 100, height: 50, justifyContent: "center", alignItems: "center"}]}><Text style={textStyle.emoji}>{ currentEmoji }</Text></View>
                     </TouchableWithoutFeedback>
                     <AddButton />
                     </View>
                 </KeyboardAvoidingView>
             </Animated.View>
-            <EmojiPicker shiftY={shiftY} shiftDown={shiftDown} />
+            <EmojiPicker shiftY={shiftY} shiftDown={shiftDown} setCurrentEmoji={setCurrentEmoji} />
         </View>
     )
 }
