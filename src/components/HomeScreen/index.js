@@ -9,8 +9,9 @@ let userPfp = require('../../../public/img/carb_2.png');
 
 const USERPFP_SIZE = 300;
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, categories }) {
   const amount = useContext(amountContext)
+  
   return (
       <ScrollView contentContainerStyle={[mainContainerStyle.mainContainer, {height: "auto"}]}>
         <View style={[ styles.userPfp ]}>

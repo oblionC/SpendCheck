@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, PermissionsAndroid, KeyboardAvoidingView, Platform} from 'react-native';
 import { COLORS } from '../../constants/colors';
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
 import { appBorderStyle } from '../../styles/appBorderStyle';
 import isNumber from '../../utils/isNumber';
 import { amountContext, spendListContext } from '../../utils/contexts';
@@ -9,15 +9,22 @@ import CategorySelect from '../CategorySelect';
 import AddButton from '../AddButton';
 import MainLabel from '../TextComponents/MainLabel';
 import TextInputBox from '../TextInputBox';
+import { categories } from '../../constants/categories';
 
 let userPfp = require('../../../public/img/carb_2.png');
 
-export default function NewScreen({navigation, setAmount, setSpendList}) {
+export default function NewScreen({route, navigation, setAmount, setSpendList}) {
   const amount = useContext(amountContext);
   const spendList = useContext(spendListContext)
   const [error, setError] = useState(false);
   const [currentCategory, setCurrentCategory] = useState("food");
+  const [userCategories, setUserCategories] = useState(categories)
   const [inp, setInp] = useState("");
+  useEffect(() => {
+    if(route.params !== undefined) {
+      setUserCategories(route.params.newCategories)
+    }
+  }, [])
 
   const checkInput = () => {
     let inputValue;
@@ -56,7 +63,7 @@ export default function NewScreen({navigation, setAmount, setSpendList}) {
             keyboardType='numeric' 
             />
           </View>
-          <CategorySelect currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} navigation={navigation} />
+          <CategorySelect currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} navigation={navigation} categories={userCategories} setCategories={setUserCategories}/>
           <AddButton pressFunction={checkInput} />
         </View>
       </ScrollView>

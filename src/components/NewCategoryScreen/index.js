@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TextInput, SafeAreaView, KeyboardAvoidingView, StyleSheet, Animated, useWindowDimensions, TouchableWithoutFeedback} from "react-native"
-import { useState, useRef, useMemo } from "react"
+import { useState, useRef, useMemo, useEffect } from "react"
 import { mainContainerStyle } from "../../styles/mainContainerStyle"
 import { appBorderStyle } from "../../styles/appBorderStyle"
 import { textboxStyle } from "../../styles/textboxStyle"
@@ -12,7 +12,8 @@ import React from "react"
 import { textStyle } from "../../styles/textStyle"
 
 
-export default function NewCategoryScreen() {
+export default function NewCategoryScreen({ route, navigation }) {
+    const categories = route.params.categories
     const [categoryName, setCategoryName] = useState("")
     const [currentEmoji, setCurrentEmoji] = useState("")
     const [shiftY, setShiftY] = useState(new Animated.Value(0))
@@ -44,17 +45,21 @@ export default function NewCategoryScreen() {
                     <View style={{width: "100%", height: "100%", justifyContent: "center", alignItems: "center"}}>
                     <MainLabel>New category:</MainLabel>
                     <TextInputBox 
-                    value={categoryName} 
-                    validateInput={(text) => {
-                        setCategoryName(text)
-                    }}
-                    keyboardType="default" />
+                        value={categoryName} 
+                        validateInput={(text) => {
+                            setCategoryName(text)
+                        }}
+                        keyboardType="default" />   
                     <TouchableWithoutFeedback onPress={() => {
                         shiftUp()
                     }}>
                         <View style={[appBorderStyle.borderStyle, textboxStyle.textboxHeight, {width: 100, height: 50, justifyContent: "center", alignItems: "center"}]}><Text style={textStyle.emoji}>{ currentEmoji }</Text></View>
                     </TouchableWithoutFeedback>
-                    <AddButton />
+                    <AddButton pressFunction={() => {
+                        let temp = categories
+                        temp[categoryName] = currentEmoji
+                        navigation.navigate("New", {newCategories: temp})
+                    }}/>
                     </View>
                 </KeyboardAvoidingView>
             </Animated.View>

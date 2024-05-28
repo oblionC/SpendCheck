@@ -9,9 +9,14 @@ const renderAddNewComponentPage = () => {
     
 }
 
-const handlePress = (isNewButton, category, setCurrentCategory, navigation) => {
+const handlePress = (isNewButton, category, setCurrentCategory, navigation, categories, setCategories) => {
     if(isNewButton) {
-        navigation.navigate("NewCategory");
+        navigation.navigate("NewCategory", 
+        {
+            categories: categories, 
+            setCategories: setCategories, 
+            navigation: navigation
+        });
     }
     else {
         setCurrentCategory(category)
@@ -35,14 +40,14 @@ function CategoryNew() {
     )
 }
 
-export default function CategoryButton({ category, setCurrentCategory, currentCategory, isNewButton, navigation }) {
+export default function CategoryButton({ category, setCurrentCategory, currentCategory, isNewButton, navigation, categories, setCategories }) {
     const buttonStyle = [styles.categoryButton, appBorderStyle.borderStyle]
     if(category === currentCategory) {
         buttonStyle.push(styles.pushedButton)
     }
 
     return (
-        <Pressable style={buttonStyle} onPress={() => handlePress(isNewButton=isNewButton, category=category, setCurrentCategory=setCurrentCategory, navigation=navigation)}>
+        <Pressable style={buttonStyle} onPress={() => handlePress(isNewButton=isNewButton, category=category, setCurrentCategory=setCurrentCategory, navigation=navigation, categories=categories, setCategories=setCategories)}>
             {isNewButton ? <CategoryNew /> : <CategoryDetails category={category} setCurrentCategory={setCurrentCategory}/>}
         </Pressable>
     )

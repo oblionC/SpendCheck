@@ -1,12 +1,11 @@
 import { StyleSheet, View, Text, Pressable } from "react-native"
 import CategoryButton from "../CategoryButton"
-import { categories } from "../../constants/categories"
 import { useEffect } from "react"
 
 
 
 
-export default function CategorySelect({ currentCategory, setCurrentCategory, navigation }) {
+export default function CategorySelect({ currentCategory, setCurrentCategory, navigation, categories, setCategories }) {
     const categoryList = [];
     let key = 0;
     Object.entries(categories).forEach(category => {
@@ -18,7 +17,7 @@ export default function CategorySelect({ currentCategory, setCurrentCategory, na
         <View style={ styles.categorySection }>
             <View style={ styles.categoryButtons }>
                 {categoryList}
-                <CategoryButton isNewButton={true} navigation={navigation} category="" />
+                <CategoryButton isNewButton={true} navigation={navigation} category="" categories={categories} setCategories={setCategories} />
             </View>
         </View>
     )

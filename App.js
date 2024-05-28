@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { COLORS } from './src/constants/colors';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import HomeScreen from './src/components/HomeScreen';
 import NewScreen from './src/components/NewScreen';
 import NewCategoryScreen from './src/components/NewCategoryScreen';
@@ -8,12 +8,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { amountContext, spendListContext } from "./src/utils/contexts";
 import 'react-native-reanimated'
+import { categories } from './src/constants/categories';
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   const [amount, setAmount] = useState(0);
   const [spendList, setSpendList] = useState([]);
+  const [userCategories, setUserCategories] = useState(categories)
 
   return (
     <spendListContext.Provider value={spendList}>
