@@ -14,8 +14,6 @@ const handlePress = (isNewButton, category, setCurrentCategory, navigation, cate
         navigation.navigate("NewCategory", 
         {
             categories: categories, 
-            setCategories: setCategories, 
-            navigation: navigation
         });
     }
     else {
