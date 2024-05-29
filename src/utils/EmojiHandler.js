@@ -3,16 +3,20 @@ import EmojiCategory from "../components/EmojiCategory"
 import EmojiItem from "../components/EmojiItem"
 
 export class EmojiHandler {
-    constructor() {
-        this.categorizedEmoji = new Map()
+    constructor(setCurrentEmoji) {
+        this.categorizedEmoji = new Map();
         emoji.forEach((e) => {
             if(this.categorizedEmoji.get(e.category) == undefined) {
-                this.categorizedEmoji.set(e.category, [e.unified.split("-")[0]])
+                this.categorizedEmoji.set(e.category, [e.unified.split("-")[0]]);
             }
             else {
-                this.categorizedEmoji.get(e.category).push(e.unified.split("-")[0])
+                this.categorizedEmoji.get(e.category).push(e.unified.split("-")[0]);
             }
         })
+        this.categorizedEmojiWithElements = new Map();
+        this.categorizedEmoji.forEach((value, key, map) => {
+            this.categorizedEmojiWithElements.set(key, this.generateCategoryEmojis(key, setCurrentEmoji));
+        })      
     }
 
     unifiedToEmoji(unified) {

@@ -5,7 +5,7 @@ import { EmojiHandler } from "../../utils/EmojiHandler";
 
 
 export default function EmojiPicker({ shiftY, shiftDown, setCurrentEmoji }) {
-    const emojiHandler = useRef(new EmojiHandler).current
+    const emojiHandler = useRef(new EmojiHandler(setCurrentEmoji)).current
     const [inactiveY, setInactiveY] = useState(new Animated.Value(400))
     const [currentCategory, setCurrentCategory] = useState("Symbols")
 
@@ -24,7 +24,7 @@ export default function EmojiPicker({ shiftY, shiftDown, setCurrentEmoji }) {
             </View>
             <ScrollView horizontal contentContainerStyle={{flexWrap: "wrap", flexDirection: "column", height: 250}}>
                 {
-                   emojiHandler.generateCategoryEmojis(currentCategory, setCurrentEmoji)
+                   emojiHandler.categorizedEmojiWithElements.get(currentCategory)
                 }
             </ScrollView>
             <Button title="close" onPress={() => {shiftDown()}} />
