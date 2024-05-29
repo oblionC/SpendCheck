@@ -41,11 +41,4 @@ export class EmojiHandler {
         })
     }
 
-    generateItems() {
-        let counter = 0
-        return emoji.map((e) => {
-            counter += 1
-            return <EmojiItem key={counter} emoji={this.unifiedToEmoji(e.unified)} /> 
-        })
-    }
 }

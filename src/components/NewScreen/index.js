@@ -55,7 +55,7 @@ export default function NewScreen({route, navigation, setAmount, setSpendList}) 
             </View>
 
             <TextInputBox value={inp} 
-            validateInput={(text) => {
+            onChangeText={(text) => {
               if(isNumber(text) || text === "") {
                 setInp(text);
               }
