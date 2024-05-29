@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TextInput, SafeAreaView, KeyboardAvoidingView, StyleSheet, Animated, useWindowDimensions, TouchableWithoutFeedback} from "react-native"
+import { View, Text, ScrollView, TextInput, SafeAreaView, KeyboardAvoidingView, StyleSheet, Animated, useWindowDimensions, TouchableWithoutFeedback, Pressable, Keyboard} from "react-native"
 import { useState, useRef, useMemo, useEffect } from "react"
 import { mainContainerStyle } from "../../styles/mainContainerStyle"
 import { appBorderStyle } from "../../styles/appBorderStyle"
@@ -11,7 +11,6 @@ import AddButton from "../AddButton"
 import React from "react"
 import { textStyle } from "../../styles/textStyle"
 
-
 export default function NewCategoryScreen({ route, navigation }) {
     const categories = route.params.categories
     const [categoryName, setCategoryName] = useState("")
@@ -19,7 +18,7 @@ export default function NewCategoryScreen({ route, navigation }) {
     const [shiftY, setShiftY] = useState(new Animated.Value(0))
     const animatedValue2 = useMemo(() => {
         return new Animated.Value(2)
-    })
+    },[])
     const {width, height} = useWindowDimensions()
     const headerHeight = useHeaderHeight()
     const mainScreenHeight = height - headerHeight
@@ -41,10 +40,15 @@ export default function NewCategoryScreen({ route, navigation }) {
     return(
         <View style={{height: "100%", width: "100%"}}>
             <Animated.View style={[mainContainerStyle.mainContainer, {transform: [{translateY: Animated.divide(shiftY, animatedValue2)}]}]}> 
+            <Pressable style={{width: "100%", height: "100%"}} onPress={() => {
+                shiftDown()
+                Keyboard.dismiss()
+                }}>
                 <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={-headerHeight} >
                     <View style={{width: "100%", height: "100%", justifyContent: "center", alignItems: "center"}}>
                     <MainLabel>New category:</MainLabel>
                     <TextInputBox 
+                        onPress={() => {shiftDown()}}
                         value={categoryName} 
                         validateInput={(text) => {
                             setCategoryName(text)
@@ -52,6 +56,7 @@ export default function NewCategoryScreen({ route, navigation }) {
                         keyboardType="default" />   
                     <TouchableWithoutFeedback onPress={() => {
                         shiftUp()
+                        Keyboard.dismiss()
                     }}>
                         <View style={[appBorderStyle.borderStyle, textboxStyle.textboxHeight, {width: 100, height: 50, justifyContent: "center", alignItems: "center"}]}><Text style={textStyle.emoji}>{ currentEmoji }</Text></View>
                     </TouchableWithoutFeedback>
@@ -62,6 +67,7 @@ export default function NewCategoryScreen({ route, navigation }) {
                     }}/>
                     </View>
                 </KeyboardAvoidingView>
+                </Pressable>
             </Animated.View>
             <EmojiPicker shiftY={shiftY} shiftDown={shiftDown} setCurrentEmoji={setCurrentEmoji} />
         </View>
