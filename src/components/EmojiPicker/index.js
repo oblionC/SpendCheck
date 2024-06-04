@@ -5,13 +5,14 @@ import { EmojiHandler } from "../../utils/EmojiHandler";
 
 
 export default function EmojiPicker({ shiftY, shiftDown, setCurrentEmoji }) {
-    const emojiHandler = useRef(new EmojiHandler(setCurrentEmoji)).current
+    const [searchText, setSearchText] = useState("")
     const [inactiveY, setInactiveY] = useState(new Animated.Value(400))
     const [currentCategory, setCurrentCategory] = useState("Symbols")
+    const emojiHandler = useRef(new EmojiHandler(setCurrentEmoji, setCurrentCategory)).current
 
     return (
         <Animated.View style={[styles.emojiPickerBoard, {bottom: 0, borderTopWidth: 3, transform: [{translateY: Animated.add(inactiveY, shiftY)}]}]}>
-            <TextInput style={[{
+            <TextInput value={searchText} style={[{
                 height: 40,
                 backgroundColor: "white",
                 marginTop: 10,
@@ -19,7 +20,7 @@ export default function EmojiPicker({ shiftY, shiftDown, setCurrentEmoji }) {
             }, appBorderStyle.borderStyle]}/> 
             <View style={{width: "100%", height: 50, flexDirection: "row", flexWrap: "nowrap", justifyContent: "center", alignItems: "center"}}>
                 {
-                    emojiHandler.generateCategories(setCurrentCategory)
+                    emojiHandler.generateCategories()
                 }
             </View>
             <ScrollView horizontal contentContainerStyle={{flexWrap: "wrap", flexDirection: "column", height: 250}}>
