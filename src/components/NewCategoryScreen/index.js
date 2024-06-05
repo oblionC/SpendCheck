@@ -11,6 +11,8 @@ import AddButton from "../AddButton"
 import React from "react"
 import { textStyle } from "../../styles/textStyle"
 
+
+
 export default function NewCategoryScreen({ route, navigation }) {
     const categories = route.params.categories
     const [categoryName, setCategoryName] = useState("")
@@ -21,12 +23,12 @@ export default function NewCategoryScreen({ route, navigation }) {
     const animatedValue2 = useMemo(() => {
         return new Animated.Value(2)
     },[])
-    const {width, height} = useWindowDimensions()
     const headerHeight = useHeaderHeight()
-    const mainScreenHeight = height - headerHeight
+    const [offset, setOffset] = useState(headerHeight)
+
     const shiftUp = () => {
         Animated.timing(shiftY, {
-            toValue: -400,
+            toValue: -460,
             duration: 500,
             useNativeDriver: true,
         }).start()
@@ -46,7 +48,7 @@ export default function NewCategoryScreen({ route, navigation }) {
                 shiftDown()
                 Keyboard.dismiss()
             }}>
-                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={-headerHeight} >
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={-offset} >
                     <View style={{width: "100%", height: "100%", justifyContent: "center", alignItems: "center"}}>
                     <MainLabel>New category:</MainLabel>
                     <View>
@@ -65,6 +67,7 @@ export default function NewCategoryScreen({ route, navigation }) {
                         keyboardType="default" />   
                     </View>
                     <TouchableWithoutFeedback onPress={() => {
+                        setOffset(headerHeight + 200)
                         shiftUp()
                         Keyboard.dismiss()
                     }}>

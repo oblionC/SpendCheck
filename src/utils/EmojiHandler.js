@@ -2,23 +2,33 @@ import emoji from "../../node_modules/emoji-datasource-apple/emoji.json"
 import EmojiCategory from "../components/EmojiCategory"
 import EmojiItem from "../components/EmojiItem"
 
+
+
 export class EmojiHandler {
     constructor(setCurrentEmoji, setCurrentCategory) {
         this.setCurrentEmoji = setCurrentEmoji
         this.setCurrentCategory = setCurrentCategory
+        this.allEmojis = this.generateAllEmojis()
         this.categorizedEmoji = new Map();
-        emoji.forEach((e) => {
-            if(this.categorizedEmoji.get(e.category) == undefined) {
-                this.categorizedEmoji.set(e.category, [e.unified]);
+        this.allEmojis.forEach((value, key, map) => {
+            if(this.categorizedEmoji.get(key.category) == undefined) {
+                this.categorizedEmoji.set(key.category, [value]);
             }
             else {
-                this.categorizedEmoji.get(e.category).push(e.unified);
+                this.categorizedEmoji.get(key.category).push(value);
             }
         })
-        this.categorizedEmojiWithElements = new Map();
-        this.categorizedEmoji.forEach((value, key, map) => {
-            this.categorizedEmojiWithElements.set(key, this.generateCategoryEmojis(key, setCurrentEmoji));
-        })      
+    }
+
+    generateAllEmojis() {
+        let output = new Map();
+        counter = 0;
+        emoji.forEach(e => {
+            if(e.category === "Component") return;
+            output.set(e, <EmojiItem key={counter} emoji={this.unifiedToEmoji(e.unified)} setCurrentEmoji={this.setCurrentEmoji}/>)
+            counter += 1;
+        })
+        return output
     }
 
     unifiedToEmoji(unified) {
@@ -34,9 +44,8 @@ export class EmojiHandler {
         let iterator = this.categorizedEmoji.keys()
         let counter = 0 
         let val = iterator.next().value
-
         while(val != undefined) {
-            output.push(<EmojiCategory key={counter} name={val} emoji={this.unifiedToEmoji(this.categorizedEmoji.get(val)[0])} setCurrentCategory={this.setCurrentCategory} />)
+            output.push(<EmojiCategory key={counter} name={val} setCurrentCategory={this.setCurrentCategory} />)
             val = iterator.next().value
             counter += 1
         }
@@ -54,7 +63,7 @@ export class EmojiHandler {
      generateFilteredEmojis(searchText) {
         output = []
         this.categorizedEmoji.forEach((value, key, map) => {
-        })
-     }
 
+        })
+    }
 }
